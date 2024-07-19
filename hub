@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Verificar si se proporcionó un argumento
+if [ $# -eq 0 ]; then
+    # Si no se proporciona un argumento, usar el directorio actual
+    repo_dir="."
+else
+    # Usar el argumento proporcionado como el directorio del repositorio
+    repo_dir=$1
+    # Verificar si el directorio proporcionado existe
+    if [ ! -d "$repo_dir" ]; then
+        echo "El directorio especificado no existe: $repo_dir"
+        exit 1
+    fi
+fi
+
+# Cambiar al directorio del repositorio
+cd "$repo_dir" || { echo "No se pudo acceder al directorio: $repo_dir"; exit 1; }
+
+# Obtener la URL del repositorio remoto
+url=$(git config --get remote.origin.url)
+
+# Verificar si se obtuvo una URL
+if [[ -z $url ]]; then
+    echo "No se pudo obtener la URL del repositorio en el directorio: $repo_dir"
+    exit 1
+fi
+
+# Transformar la URL en formato HTTPS si es necesario
+if [[ $url == git@* ]]; then
+    url=${url/:/\//}
+    url=https://${url/git@/}
+    url=${url/.git/}
+fi
+
+# Mostrar la URL para verificar
+echo "URL del repositorio: $url"
+
+# Abrir la URL en el navegador
+if command -v xdg-open &> /dev/null; then
+    xdg-open $url
+else
+    echo "No se pudo encontrar un comando para abrir el navegador."
+    echo "URL o archivo: $url"
+fi
+
