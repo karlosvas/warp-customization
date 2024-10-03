@@ -7,10 +7,37 @@ if [ $# -eq 0 ]; then
 else
     # Usar el argumento proporcionado como el directorio del repositorio
     repo_dir=$1
-    # Verificar si el directorio proporcionado existe
-    if [ ! -d "$repo_dir" ]; then
-        echo "El directorio especificado no existe: $repo_dir"
-        exit 1
+
+    if [ "$1" == "-o" ]; then
+        echo -e "Opening web...\n"
+        echo " ██████╗ ██╗████████╗██╗  ██╗██╗   ██╗██████╗ "
+        echo "██╔════╝ ██║╚══██╔══╝██║  ██║██║   ██║██╔══██╗"
+        echo "██║  ███╗██║   ██║   ███████║██║   ██║██████╔╝"
+        echo "██║   ██║██║   ██║   ██╔══██║██║   ██║██╔══██╗"
+        echo "╚██████╔╝██║   ██║   ██║  ██║╚██████╔╝███████╗"
+        echo " ╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝"
+
+        case "$(uname)" in
+            Linux)
+                xdg-open "https://github.com"
+                ;;
+            Darwin)
+                open "https://github.com"
+                ;;
+            CYGWIN*|MINGW32*|MSYS*|MINGW*)
+                start "https://github.com"
+                ;;
+            *)
+                echo "Sistema operativo no soportado"
+                ;;
+        esac
+        exit 0  
+    else
+        # Verificar si el directorio proporcionado existe
+        if [ ! -d "$repo_dir" ]; then
+            echo "The provided directory does not exist: $repo_dir"
+            exit 1
+        fi
     fi
 fi
 
