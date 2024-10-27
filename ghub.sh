@@ -65,11 +65,15 @@ if [ "$lang" == "es" ]; then
     else
         # Usar el argumento proporcionado como el directorio del repositorio
         repo_dir=$1
+        # Eliminar el prefijo .\ si existe
+        # Eliminar el prefijo . si existe
+        # Eliminar el sufijo \ si existe
+        repo_dir=${repo_dir#.\\}
+        repo_dir=${repo_dir#.}
+        repo_dir=${repo_dir%\\}
         # Verificar si el directorio proporcionado existe
-        if [ ! -d "$repo_dir" ]; then
-            echo "El directorio especificado no existe: $repo_dir"
-            exit 1
-        fi
+        # Directorio actual mas el repor dir
+        repo_dir=$(pwd)/${repo_dir}
     fi
 
     # Cambiar al directorio del repositorio
