@@ -102,8 +102,14 @@ if [ "$lang" == "es" ]; then
     elif command -v open &> /dev/null; then
         open $url
     else
-        echo "No se pudo encontrar un comando para abrir el navegador."
-        echo "Abriendo en la terminal de cmd"
+        echo -e "\e[91mNo se pudo encontrar un comando para abrir el navegador\e[0m"
+        echo -e "\e[91mIntentando desde cmd\e[0m\n"
+        echo -e "\t ██████╗ ██╗████████╗██╗  ██╗██╗   ██╗██████╗ "
+        echo -e "\t██╔════╝ ██║╚══██╔══╝██║  ██║██║   ██║██╔══██╗"
+        echo -e "\t██║  ███╗██║   ██║   ███████║██║   ██║██████╔╝"
+        echo -e "\t██║   ██║██║   ██║   ██╔══██║██║   ██║██╔══██╗"
+        echo -e "\t╚██████╔╝██║   ██║   ██║  ██║╚██████╔╝███████╗"
+        echo -e "\t ╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝"
         cmd.exe /c start $url
     fi
 elif [ "$lang" == "en" ]; then
@@ -183,8 +189,15 @@ elif [ "$lang" == "en" ]; then
     elif command -v start &> /dev/null; then
         start $url
     else
-        echo "Could not find a command to open the browser"
-        echo "Opening in cmd terminal"
+        echo -e "\e[91mCould not find a command to open the browser\e[0m"
+        echo -e "\e[91mTrying from cmd\e[0m\n"
+        echo -e "\t ██████╗ ██╗████████╗██╗  ██╗██╗   ██╗██████╗ "
+        echo -e "\t██╔════╝ ██║╚══██╔══╝██║  ██║██║   ██║██╔══██╗"
+        echo -e "\t██║  ███╗██║   ██║   ███████║██║   ██║██████╔╝"
+        echo -e "\t██║   ██║██║   ██║   ██╔══██║██║   ██║██╔══██╗"
+        echo -e "\t╚██████╔╝██║   ██║   ██║  ██║╚██████╔╝███████╗"
+        echo -e "\t ╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝"
         cmd.exe /c start $url
     fi
+    
 fi
